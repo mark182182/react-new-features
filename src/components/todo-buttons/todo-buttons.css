@@ -5,3 +5,7 @@
 .todo-buttons {
   width: 75% !important;
 }
+
+.todo-button-selected {
+  border: 1px black dashed !important;
+}

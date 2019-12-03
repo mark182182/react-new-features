@@ -6,7 +6,7 @@ import './todo-table.css';
 export const completed = React.createContext(false);
 
 export const TodoTable = props => {
-  const { list, setList, setCompletedItem } = props;
+  const { list, setList, filter } = props;
 
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list));
@@ -58,6 +58,39 @@ export const TodoTable = props => {
     }
   }
 
+  const generateRows = row => {
+    return <TableRow key={row.id}>
+      <TableCell align="left">{<Checkbox checked={row.isCompleted} onClick={() => checkItem(row)} />}
+      </TableCell>
+      <TableCell align="center" className={row.isCompleted ? 'todo-table-completed' : null} onDoubleClick={() => editRow(row)}>
+        {row.modify ?
+          <TextField defaultValue={row.name} onKeyDown={(event) => modifyRowName(event, row)} /> :
+          <Typography>{row.name}</Typography>}
+      </TableCell>
+      <TableCell align="right">{
+        <Button onClick={() => removeFromTable(row)}>
+          <Clear />
+        </Button>
+      }</TableCell>
+    </TableRow>
+  }
+
+  const filterRows = row => {
+    switch (filter) {
+      case 0:
+        return generateRows(row);
+      case 1:
+        if (!row.isCompleted) {
+          return generateRows(row);
+        }
+      case 2:
+        if (row.isCompleted) {
+          return generateRows(row);
+        }
+    }
+  }
+
+
   return (
     <>
       <Paper>
@@ -69,20 +102,7 @@ export const TodoTable = props => {
           </TableHead>
           <TableBody>
             {list.map(row => (
-              <TableRow key={row.id}>
-                <TableCell align="left">{<Checkbox checked={row.isCompleted} onClick={() => checkItem(row)} />}
-                </TableCell>
-                <TableCell align="center" className={row.isCompleted ? 'todo-table-completed' : null} onDoubleClick={() => editRow(row)}>
-                  {row.modify ?
-                    <TextField defaultValue={row.name} onKeyDown={(event) => modifyRowName(event, row)} /> :
-                    <Typography>{row.name}</Typography>}
-                </TableCell>
-                <TableCell align="right">{
-                  <Button onClick={() => removeFromTable(row)}>
-                    <Clear />
-                  </Button>
-                }</TableCell>
-              </TableRow>
+              filterRows(row)
             ))}
           </TableBody>
         </Table>
