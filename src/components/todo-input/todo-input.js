@@ -2,20 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, TextField, Paper } from '@material-ui/core';
 import { TodoTable } from '../todo-table/todo-table';
 import { TodoButtons } from '../todo-buttons/todo-buttons';
+import { TodoQuote } from '../todo-quote/todo-quote';
 import uuid from 'uuid/v1';
 import './todo-input.css';
 
-export const TodoInput = () => {
+export const completed = React.createContext(false);
 
+export const TodoInput = () => {
   const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const previousList = localStorage.getItem('list');
+    if (previousList) {
+      setList(JSON.parse(previousList));
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list));
   }, [list]);
 
+  useEffect(() => {
+
+  });
+
   const addToList = event => {
     if (event.which === 13) {
-      setList([...list, { id: uuid(), isCompleted: false, name: event.target.value }]);
+      setList([...list, { id: uuid(), isCompleted: false, name: event.target.value, modify: false }]);
     }
   }
 
@@ -32,6 +45,7 @@ export const TodoInput = () => {
           <TodoButtons list={list}></TodoButtons>
         </Grid>
       </Paper>
+      <TodoQuote />
     </Container>
   );
 }
