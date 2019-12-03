@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grid, TextField } from '@material-ui/core';
+import { Container, Grid, TextField, Paper } from '@material-ui/core';
 import TodoTable from '../todo-table/todo-table';
 import uuid from 'uuid/v1';
+import './todo-input.css';
 
 const TodoInput = () => {
 
@@ -13,18 +14,23 @@ const TodoInput = () => {
 
   const addToList = event => {
     if (event.which === 13) {
-      setList([...list, { id: uuid(), isSelected: false, name: event.target.value }]);
+      setList([...list, { id: uuid(), isCompleted: false, name: event.target.value }]);
     }
   }
 
   return (
     <Container fixed>
-      <Grid container item>
-        <TextField onKeyDown={addToList} />
-      </Grid>
-      <Grid container item>
-        {list.length > 0 && <TodoTable list={list} setList={setList} />}
-      </Grid>
+      <Paper className='todo-wrapper'>
+        <Grid container item justify='center'>
+          <TextField onKeyDown={addToList} />
+        </Grid>
+        <Grid container item justify='center'>
+          {list.length > 0 && <TodoTable list={list} setList={setList} />}
+        </Grid>
+        <Grid container item justify='center'>
+
+        </Grid>
+      </Paper>
     </Container>
   );
 }

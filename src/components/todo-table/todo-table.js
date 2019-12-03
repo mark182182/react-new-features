@@ -17,7 +17,7 @@ const TodoTable = props => {
   const checkItem = itemToCheck => {
     const modifiedList = list.map(current => {
       if (current.id === itemToCheck.id) {
-        current.isSelected = !current.isSelected;
+        current.isCompleted = !current.isCompleted;
         return current;
       } else {
         return current;
@@ -27,7 +27,7 @@ const TodoTable = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Paper>
         <Table >
           <TableHead>
@@ -38,9 +38,9 @@ const TodoTable = props => {
           <TableBody>
             {list.map(row => (
               <TableRow key={row.id}>
-                <TableCell align="left">{<Checkbox checked={row.isSelected} onClick={() => checkItem(row)} />}
+                <TableCell align="left">{<Checkbox checked={row.isCompleted} onClick={() => checkItem(row)} />}
                 </TableCell>
-                <TableCell align="center">{row.name}</TableCell>
+                <TableCell align="center" className={!row.isCompleted ? 'todo-table-completed' : null}>{row.name}</TableCell>
                 <TableCell align="right">{
                   <Button onClick={() => removeFromTable(row)}>
                     <Clear />
@@ -51,7 +51,7 @@ const TodoTable = props => {
           </TableBody>
         </Table>
       </Paper>
-    </React.Fragment>
+    </>
   )
 }
 
