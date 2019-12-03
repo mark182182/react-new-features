@@ -7,7 +7,6 @@ export const TodoButtons = props => {
 
   const modifyFilter = event => {
     const clickedName = parseInt(event.currentTarget.id);
-    console.log(clickedName);
     switch (clickedName) {
       case 0:
         setFilter(0);

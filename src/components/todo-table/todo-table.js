@@ -3,8 +3,6 @@ import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, Checkb
 import { Clear } from '@material-ui/icons';
 import './todo-table.css';
 
-export const completed = React.createContext(false);
-
 export const TodoTable = props => {
   const { list, setList, filter } = props;
 
@@ -26,9 +24,6 @@ export const TodoTable = props => {
       }
     });
     setList(modifiedList);
-    // if (!itemToCheck.isCompleted) {
-    //   setCompletedItem(true);
-    // }
   }
 
   const editRow = rowToEdit => {
@@ -87,6 +82,8 @@ export const TodoTable = props => {
         if (row.isCompleted) {
           return generateRows(row);
         }
+      default:
+        break;
     }
   }
 

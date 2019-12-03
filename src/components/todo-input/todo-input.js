@@ -6,8 +6,6 @@ import { TodoQuote } from '../todo-quote/todo-quote';
 import uuid from 'uuid/v1';
 import './todo-input.css';
 
-export const completed = React.createContext(false);
-
 export const TodoInput = () => {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState(0);
@@ -42,7 +40,7 @@ export const TodoInput = () => {
           <TodoButtons list={list} filter={filter} setFilter={setFilter}></TodoButtons>
         </Grid>
       </Paper>
-      <TodoQuote />
+      <TodoQuote list={list} />
     </Container>
   );
 }
