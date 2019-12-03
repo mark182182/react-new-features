@@ -1,5 +1,14 @@
 .todo-wrapper {
   width: 60vw;
   height: 80vh;
+}
+
+.todo-list-container {
   overflow: auto;
+  height: 80%;
+  margin-bottom: 1em;
+}
+
+.todo-buttons-container {
+  background: #d1c4e9;
 }

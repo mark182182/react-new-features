@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, Checkbox } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 
-const TodoTable = props => {
+export const TodoTable = props => {
 
   const { list, setList } = props;
 
@@ -54,5 +54,3 @@ const TodoTable = props => {
     </>
   )
 }
-
-export default TodoTable;

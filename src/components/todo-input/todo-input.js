@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Grid, TextField, Paper } from '@material-ui/core';
-import TodoTable from '../todo-table/todo-table';
+import { TodoTable } from '../todo-table/todo-table';
+import { TodoButtons } from '../todo-buttons/todo-buttons';
 import uuid from 'uuid/v1';
 import './todo-input.css';
 
-const TodoInput = () => {
+export const TodoInput = () => {
 
   const [list, setList] = useState([]);
 
@@ -24,15 +25,13 @@ const TodoInput = () => {
         <Grid container item justify='center'>
           <TextField onKeyDown={addToList} />
         </Grid>
-        <Grid container item justify='center'>
+        <Grid container item justify='center' className='todo-list-container'>
           {list.length > 0 && <TodoTable list={list} setList={setList} />}
         </Grid>
-        <Grid container item justify='center'>
-
+        <Grid container item className='todo-buttons-container'>
+          <TodoButtons list={list}></TodoButtons>
         </Grid>
       </Paper>
     </Container>
   );
 }
-
-export default TodoInput;
